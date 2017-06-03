@@ -1,0 +1,61 @@
+buildscript {
+	repositories {
+		maven {
+			url "https://plugins.gradle.org/m2/"
+		}
+	}
+	dependencies {
+	  classpath "com.gradle.publish:plugin-publish-plugin:0.9.7"
+	}
+}
+
+plugins {
+  id 'org.ajoberstar.grgit' version '1.7.1'
+  id 'org.ajoberstar.release-base' version '1.7.1'
+  id 'groovy'
+}
+apply plugin: 'com.gradle.plugin-publish'
+
+import org.ajoberstar.gradle.git.release.opinion.Strategies
+import org.ajoberstar.gradle.git.release.semver.RebuildVersionStrategy
+
+project.group = 'org.patuf.gradle'
+
+repositories {
+	jcenter()
+	mavenCentral()
+}
+
+release {
+	versionStrategy RebuildVersionStrategy.INSTANCE
+	versionStrategy Strategies.SNAPSHOT
+	versionStrategy Strategies.FINAL
+}
+
+pluginBundle {
+	website = 'http://www.gradle.org/'
+	vcsUrl = 'https://github.com/patuf/gradle-release-plugin.git'
+	description = 'Minimum complexity, maximum control gradle release plugin (early development stage)'
+
+	plugins {
+		buildinfoPlugin {
+		  id = 'org.patuf.gradle-buildinfo-plugin'
+		  displayName = 'Gradle BuildInfor plugin'
+		  description = 'Simple plugin that collects information about the build and prints it in decorated manner'
+		  tags = ['gradle', 'buildinfo', 'version', 'versioning']
+		  version = '0.0.1'
+		}
+	}
+}
+
+dependencies {
+	compile gradleApi()
+	compile localGroovy() //not needed for Java plugins
+	compile 'org.slf4j:slf4j-api:1.7.21'
+	compile 'org.ajoberstar:grgit:1.+'
+	testCompile 'junit:junit:4.+'
+//	testCompile 'ch.qos.logback:logback-classic:1.0.+'
+}
+
+println version
+//tasks.release.dependsOn 'publishPlugins' 
