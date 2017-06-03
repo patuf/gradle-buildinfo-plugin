@@ -43,7 +43,7 @@ pluginBundle {
 		  displayName = 'Gradle BuildInfo plugin'
 		  description = 'Simple plugin that collects information about the build and make it available through an extension map'
 		  tags = ['gradle', 'buildinfo', 'version', 'git', 'github']
-		  version = '0.0.1'
+		  version = project.version
 		}
 	}
 }
