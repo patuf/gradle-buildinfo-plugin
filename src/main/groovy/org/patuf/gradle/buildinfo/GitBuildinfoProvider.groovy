@@ -32,8 +32,8 @@ public class GitBuildinfoProvider implements BuildinfoProvider {
 	public Map<String, String> getBuildinfo() {
 		Map<String, String> buildInfo = [:];
 		
-		buildInfo['BRANCH'] = grgit.branch.current.fullName
-		buildInfo['REMOTEBRANCH'] = grgit.branch.current.trackingBranch.fullName
+		buildInfo['BRANCH'] = grgit.branch.current.name
+		buildInfo['REMOTEBRANCH'] = grgit.branch.current.trackingBranch.name
 		buildInfo['DIRTY'] = !grgit.status().clean
 		buildInfo['HEAD'] = grgit.head().id
 		

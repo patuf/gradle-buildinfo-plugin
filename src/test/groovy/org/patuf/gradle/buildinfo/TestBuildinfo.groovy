@@ -41,7 +41,9 @@ class TestBuildinfo extends GroovyTestCase {
 
 		project.pluginManager.apply BuildinfoPlugin
 
-		println project.buildinfo.retrieve()
+		project.buildinfo.retrieve()
+		println "branch is: " + project.buildinfo['git_BRANCH']
+		println "all bi is: " + project.buildinfo.toString()
 
 //		final AbstractTask rlsTask = (AbstractTask) project.getTasks().getByName('release')
 //		rlsTask.execute();

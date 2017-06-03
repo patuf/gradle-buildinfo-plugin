@@ -19,7 +19,7 @@ import org.ajoberstar.grgit.Grgit
 import org.gradle.api.Project
 import org.slf4j.LoggerFactory
 
-class BuildinfoExtension {
+class BuildinfoExtension extends LinkedHashMap<String, String> {
 
 	private static final LOGGER = LoggerFactory.getLogger(BuildinfoExtension.class)
 	
@@ -29,33 +29,25 @@ class BuildinfoExtension {
 	 * Instance of grgit, can be used in local repo
 	 */
 	Grgit grgit;
-	private Map<String, String> buildInfo
 	private final Map<String, BuildinfoProvider> biProviders = [:]
 
-	BuildinfoExtension() {
-		// Purely for testing purposes, do not use this constructor for normal operation!
-	}
-	
     BuildinfoExtension(Project project) {
         this.project = project
 		grgit = Grgit.open(currentDir: project.rootProject.rootDir)
     }
 
 	public Map<String, String> retrieve() {
-		if (this.buildInfo == null) {
+		if (this.isEmpty()) {
 			Map<String, String> buildInfo = [:]
 			biProviders.each {
 //				String bipName, BuildinfoProvider biProvider -> LOGGER.warn("$bipName kulturec ${biProvider.getBuildinfo().toString()}")
 				String bipName, BuildinfoProvider biProvider -> biProvider.getBuildinfo().each {
-					key, value -> buildInfo["${biProvider.name}_$key"] = value
+					key, value -> this["${biProvider.name}_$key"] = value
 				}
 			}
-			this.buildInfo = buildInfo
 		}
 		
-		
-		
-		return this.buildInfo
+		return this
 	}
 	
 	void buildinfoProvider(BuildinfoProvider biProvider) {
@@ -65,5 +57,4 @@ class BuildinfoExtension {
 		} else
 			LOGGER.warn("$biProvider.name failed to initialize. Skipping")
 	}
-
 }
