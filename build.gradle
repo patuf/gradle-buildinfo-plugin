@@ -40,9 +40,9 @@ pluginBundle {
 	plugins {
 		buildinfoPlugin {
 		  id = 'org.patuf.gradle-buildinfo-plugin'
-		  displayName = 'Gradle BuildInfor plugin'
-		  description = 'Simple plugin that collects information about the build and prints it in decorated manner'
-		  tags = ['gradle', 'buildinfo', 'version', 'versioning']
+		  displayName = 'Gradle BuildInfo plugin'
+		  description = 'Simple plugin that collects information about the build and make it available through an extension map'
+		  tags = ['gradle', 'buildinfo', 'version', 'git', 'github']
 		  version = '0.0.1'
 		}
 	}
@@ -57,5 +57,5 @@ dependencies {
 //	testCompile 'ch.qos.logback:logback-classic:1.0.+'
 }
 
-println version
-//tasks.release.dependsOn 'publishPlugins' 
+//println version
+tasks.release.dependsOn 'publishPlugins' 
