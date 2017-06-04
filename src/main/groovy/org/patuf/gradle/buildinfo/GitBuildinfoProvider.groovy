@@ -33,7 +33,7 @@ public class GitBuildinfoProvider implements BuildinfoProvider {
 		Map<String, String> buildInfo = [:];
 		
 		buildInfo['BRANCH'] = grgit.branch.current.name
-		buildInfo['REMOTEBRANCH'] = grgit.branch.current.trackingBranch.name
+		buildInfo['REMOTEBRANCH'] = grgit.branch.current.trackingBranch ? grgit.branch.current.trackingBranch.name : "NO REMOTE BRANCH"
 		buildInfo['DIRTY'] = !grgit.status().clean
 		buildInfo['HEAD'] = grgit.head().id
 		
