@@ -33,15 +33,15 @@ release {
 }
 
 pluginBundle {
-	website = 'http://www.gradle.org/'
+	website = 'https://github.com/patuf/gradle-buildinfo-plugin'
 	vcsUrl = 'https://github.com/patuf/gradle-release-plugin.git'
-	description = 'Minimum complexity, maximum control gradle release plugin (early development stage)'
+	description = 'Simple plugin that collects information about the build and makes it available through an extension map'
 
 	plugins {
 		buildinfoPlugin {
 		  id = 'org.patuf.gradle-buildinfo-plugin'
 		  displayName = 'Gradle BuildInfo plugin'
-		  description = 'Simple plugin that collects information about the build and make it available through an extension map'
+		  description = 'Simple plugin that collects information about the build and makes it available through an extension map'
 		  tags = ['gradle', 'buildinfo', 'version', 'git', 'github']
 		  version = project.version
 		}
